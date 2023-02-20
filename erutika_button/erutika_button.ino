@@ -2,6 +2,7 @@
  const int BUTTON = 7;
 
 int val = 0;
+int state = 0;
 
  void setup() {
   // put your setup code here, to run once:

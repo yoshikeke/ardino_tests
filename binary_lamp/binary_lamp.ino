@@ -21,7 +21,7 @@ void loop() {
   // onボタンが押されたときの処理(ボタンがONになった瞬間だけ反応)
   int onval = digitalRead(ONBUTTON);
   if((onval == HIGH)&&(old_onval == LOW)){
-    state = state + 1;
+    ++state;
   }
   // 以前の状態を保持
   old_onval = onval;
@@ -29,7 +29,7 @@ void loop() {
   // offボタンを押されたときの処理(ボタンがONになった瞬間だけ反応)
   int offval = digitalRead(OFFBUTTON);
   if((offval == HIGH)&&(old_offval == LOW)){
-    state = state - 1;
+    --state;
   }
   // 以前の状態を保持
   old_offval = offval;

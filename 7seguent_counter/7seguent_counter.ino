@@ -1,15 +1,17 @@
-// 定数
+int LEDS[] = {13, 12, 11, 10, 9, 6, 5};
+int LEDS_LENGTH = 7;
 int ONBUTTON = 8;
 int OFFBUTTON = 7;
-int LEDS[] = {13, 12, 11, 10, 9};
-int LEDS_LENGTH = 5;
 
-// 状態
 int old_onval = 0;
 int old_offval = 0;
 int state = 0;
 
+int seg[][7] = {{1,1,1,1,1,1,0},{1,1,0,0,0,0,0},{0,1,1,0,1,1,1},{0,0,1,1,1,1,1},{1,0,0,1,1,0,1},{1,0,1,1,0,1,1},{1,1,1,1,0,0,1},{0,0,0,1,1,1,0},{1,1,1,1,1,1,1},{1,0,1,1,1,1,1}};
+int seg0[] = {1,1,1,1,1,1,0};
+
 void setup() {
+  // put your setup code here, to run once:
   pinMode(ONBUTTON,INPUT);
   pinMode(OFFBUTTON,INPUT);
   for (int i = 0; i < LEDS_LENGTH; ++i) {
@@ -17,8 +19,14 @@ void setup() {
   }
 }
 
+void lampswitch(int var){  
+  for(int i = 0;i < LEDS_LENGTH;++i){
+    digitalWrite(LEDS[i],seg[var][i]);
+    
+  }
+}
 void loop() {
-  // onボタンが押されたときの処理(ボタンがONになった瞬間だけ反応)
+  
   int onval = digitalRead(ONBUTTON);
   if((onval == HIGH)&&(old_onval == LOW)){
     ++state;
@@ -33,16 +41,6 @@ void loop() {
   }
   // 以前の状態を保持
   old_offval = offval;
-
-  
- 
-  int loopstate = state;
-  for(int i = 0;i<5;i++){
-    if(loopstate%2 == 1){
-      digitalWrite(LEDS[i],HIGH);
-    }else{
-      digitalWrite(LEDS[i],LOW);
-    }
-    loopstate = loopstate >> 1;
-  }
+  // put your main code here, to run repeatedly:
+  lampswitch(state);
 }

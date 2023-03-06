@@ -34,12 +34,7 @@ void loop() {
   // 以前の状態を保持
   old_offval = offval;
 
-  // stateをbitに変換して、点灯させる
-  // int loopstate = state;
-  // for (int i = 0; i < LEDS_LENGTH; ++i) {
-  //   digitalWrite(LEDS[(LEDS_LENGTH - 1) - i], loopstate % 2 ? HIGH : LOW);
-  //   loopstate = loopstate << 1; // bitをshiftする
-  // }
+  
  
   int loopstate = state;
   for(int i = 0;i<5;i++){

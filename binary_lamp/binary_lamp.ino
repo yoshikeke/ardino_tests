@@ -12,7 +12,7 @@ int state = 0;
 void setup() {
   pinMode(ONBUTTON,INPUT);
   pinMode(OFFBUTTON,INPUT);
-  for (i = 0; i < LEDS_LENGTH; ++i) {
+  for (int i = 0; i < LEDS_LENGTH; ++i) {
     pinMode(LEDS[i],OUTPUT);
   }
 }
@@ -35,9 +35,19 @@ void loop() {
   old_offval = offval;
 
   // stateをbitに変換して、点灯させる
+  // int loopstate = state;
+  // for (int i = 0; i < LEDS_LENGTH; ++i) {
+  //   digitalWrite(LEDS[(LEDS_LENGTH - 1) - i], loopstate % 2 ? HIGH : LOW);
+  //   loopstate = loopstate << 1; // bitをshiftする
+  // }
+ 
   int loopstate = state;
-  for (i = 0; i < LEDS_LENGTH; ++i) {
-    digitalWrite(LEDS[(LEDS_LENGTH - 1) - i], loopstate % 2 ? HIGH : LOW);
-    loopstate = loopstate << 1; // bitをshiftする
+  for(int i = 0;i<5;i++){
+    if(loopstate%2 == 1){
+      digitalWrite(LEDS[i],HIGH);
+    }else{
+      digitalWrite(LEDS[i],LOW);
+    }
+    loopstate = loopstate >> 1;
   }
 }
